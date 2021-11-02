@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practicando Ajax</title>
+
+    <script>
+        var peticionHTTP;
+
+        function inicializar_XHR(){
+            if(window.XMLHttpRequest)
+                peticionHTTP =  new XMLHttpRequest();
+            else peticionHTTP =  new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        function realizarPeticion(url, metodo, funcion){
+            peticionHTTP.onreadystatechange = funcion;
+            peticionHTTP.open(metodo,url,true);
+            peticionHTTP.send(null);
+        }
+
+        function descargarArchivo(){
+            inicializar_XHR();
+            realizarPeticion('archivo.txt', 'GET', funcActuadora);
+        }
+
+        function funcActuadora(){
+            alert('Actuando pliz');
+            if( peticionHTTP.readyState == 4)
+                if(peticionHTTP.status == 200)
+                    document.write(peticionHTTP.responseText);
+        }
+
+       
+
+        window.onload =  descargarArchivo;
+       
+    </script>
+
+</head>
+<body>
+    <!-- Esto es el link https://www.youtube.com/watch?v=d-lokOMSHFE-->
+    <!--Esto se hace con bd con ajax y jquery-->
+</body>
+</html>
